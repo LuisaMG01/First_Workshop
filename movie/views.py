@@ -5,8 +5,11 @@ from .models import movie
 def home(request):
     #return HttpResponse('<h1>Welcome to Home Page<h1>')
     searchTerm = request.GET.get('searchMovie')
-    
-    return render(request, 'home.html', {'searchTerm': searchTerm})
+    if searchTerm:
+        movies = movie.objects.filter(title__icontains = searchTerm)
+    else: 
+        movies = movie.objects.all()
+    return render(request, 'home.html', {'searchTerm': searchTerm, 'movies': movies})
 # Create your views here.
 
 

@@ -1,7 +1,41 @@
+<!doctype html>
+<html lang="en">
+
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<div class = "container">
+
+{% extends 'base.html' %}
+{% block content %}
+<body>
+
+<div class="countainer mt-5">
+    <h1 class="mb-3">Upcomming...</h1>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://via.placeholder.com/800x250/FF5733/FFFFF?text=Movie+1" class="d-block w-100" alt="Movie 1">
+          </div>
+          <div class="carousel-item">
+            <img src="https://via.placeholder.com/800x250/C70039/FFFFF?text=Movie+2"" class="d-block w-100" alt="Movie 2">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
     <form action = "">
         <div class = "mb-3">
             <label for = "searchMovie" class = "form-label">
@@ -11,5 +45,39 @@
         </div>
         <button type = "submit" class = "btn btn-primary">Search</button>
     </form>
-    Searching for {{searchTerm}}
+    <p>
+        Searching for {{searchTerm}}
+    </p>
+    <div class = "row row-cols-1 row-cols-md-3 g-4">
+        {% for movie in movies%}
+        <div v-for = "movie in movies" class = "col">
+            <div class = "card">
+                <img class = "card-img-top" src = "{{movie.image.url}}"/>
+                <div class = "card-body">
+                    <h5 class = "card-title fw-bold">{{movie.title}}</h5>
+                    <p class = "card-text">{{movie.description}}</p>
+                    {% if movie.url %}
+                        <a href = "{{movie.url}}" class = "btn btn-primary">Movie link</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <br/>
+    <br/>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+    $('.carousel').carousel();
+</script>
+
+{% endblock content %}
+</body>
+</html>
